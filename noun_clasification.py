@@ -6,11 +6,11 @@ from spacy.lang.es.examples import sentences
 from spacy_lookup import Entity
 
 nlp = spacy.load('es_core_news_sm')
-entity = Entity(keywords_list=['invico', 'victoria', 'montelibano','luis','nicolas','utp','dosquebradas'])
+entity = Entity(keywords_list=['invico', 'victoria', 'montelibano','san' ,'luis','nicolas','utp','dosquebradas'])
 nlp.add_pipe(entity, last=True) # add this entity al pipeline
 
-doc = nlp('ruta que me lleve de la utp a dosquebradas')
-#doc = nlp('ruta entre san nicolas y san luis')
+#doc = nlp('notas de Yerson victoria')
+doc = nlp(u'ruta entre san nicolas y  luis')
 #print(doc.text)
 
 #nouns = dict() #diccionario para almecenar los sustantivos
@@ -20,6 +20,7 @@ for token in doc:
     #print(token.is_stop) #para saber si el token es de parada ( words que se repiten mucho )
     if token._.is_entity:
         recorrido[token.text] = token.pos_
+
 
 print(recorrido)
 #print(recorrido.keys())
