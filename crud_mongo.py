@@ -14,9 +14,19 @@ collection = db.RutasPereira
 # "READ" -> Leemos todos los documentos de la base de datos
 cursor = collection.find()
 
+
+def buscar_ruta(punto):
+    result = []
+    print ("\n\n*** Buqueda de los rutas***")
+    cursor = collection.find({"ida":{"$in":[punto]}})
+    for rut in cursor:
+      result.append(rut['nombre'])
+    return result  
+"""
 def buscar_ruta(punto):
     print ("\n\n*** Buqueda de los rutas***")
     cursor = collection.find({"ida":{"$in":[punto]}})
     for rut in cursor:
         print ("%s - %s" \
           %(rut['nombre'], rut['ida']))
+"""
