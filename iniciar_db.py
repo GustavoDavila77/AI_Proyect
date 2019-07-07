@@ -5,7 +5,8 @@ from Ruta import Ruta
 # Creo una lista de objetos Ruta a insertar en la BD
 rutas = [
     Ruta('ruta1',['victoria', 'libertad','luis', 'jardin', 'utp']),
-    Ruta('ruta2',['nicolas', 'terminal','jardin', 'utp'])
+    Ruta('ruta2',['nicolas', 'terminal','jardin', 'utp']),
+    Ruta('ruta3',['pollo', 'dosquebradas','montelibano'])
 ]
 
 
