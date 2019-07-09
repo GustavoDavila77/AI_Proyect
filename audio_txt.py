@@ -11,7 +11,7 @@ def Listening():
         text = r.recognize_google(audio, language='es-CO')
         print('TEXT: ' + text)
     except:
-        text = 'error'
+        text = 'No se detecto audio'
         print(text)
     
     return text

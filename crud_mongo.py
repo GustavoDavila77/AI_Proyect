@@ -32,23 +32,32 @@ def buscar_ruta(punto):
         result.append(rut['nombre'])
     return result  
 
-#TODO crear/retornar dos diccionarios, key: nombre ruta , curpo: lista con ida o vuelta 
+#retorna una lista de diccionarios, donde los puntos coiciden
+#tanto en ida como en vuelta
 def buscar_dos_puntos(punto1,punto2):
   coincidir_ida = dict()
   coincidir_vuelta = dict()
-  #lista_coincidir = []
+  lista_coincidir = []
   cursor = collection.find({"ida":{"$all":[punto1,punto2]}})
   cursor2 = collection.find({"vuelta":{"$all":[punto1,punto2]}})
   for c in cursor:
     if not c['nombre'] in coincidir_ida: #para que no se vaya a repetir rutas
-      coincidir_ida[c['nombre']] = c['ida']
+      coincidir = {}
+      coincidir_ida[c['nombre']] = c['ida'] #se añade al diccionario
+      coincidir[c['nombre']] = c['ida'] #se crea un diccionario aux
+      lista_coincidir.append(coincidir)
   for c in cursor2:
     if not c['nombre'] in coincidir_vuelta: #para que no se vaya a repetir rutas
+      coincidir= {}
       coincidir_vuelta[c['nombre']] = c['vuelta']
+      coincidir[c['nombre']] = c['vuelta']
+      #coincidir_vuelta[c['nombre']] = c['vuelta']
+      lista_coincidir.append(coincidir)
 
   print(coincidir_ida.keys())
   print(coincidir_vuelta.keys())
-  return [coincidir_ida,coincidir_vuelta] #retorna los dos diccionarios
+  #return [coincidir_ida,coincidir_vuelta] #retorna los dos diccionarios
+  return lista_coincidir
   
   #print(coincidir_ida.values())
   #print(coincidir_vuelta.keys())
@@ -79,13 +88,44 @@ def indice_punto(punto, lista):
           print("indice p: "+str(j))
           #return j #retorna el indice donde lo encuentra
 
+def indice_punto_dict(punto, diccionario):
+  llave_indice= []
+  for clave,lista in diccionario.items():
+    for j in range(len(lista)):
+      if lista[j] == punto:
+        llave_indice= [clave,j] #guardo la ruta y el indice
+  return llave_indice
+  
+
+    
 #devulve los indices 2 los 2 puntos en los diferentes listas de ida
 def two_points(punto1, punto2):
-    ida_lista = ida_vuelta_list(punto1)
-    indice_punto1 = indice_punto(punto1,ida_lista)
-    indice_punto2 = indice_punto(punto2,ida_lista)
-    print("indice punto 1: "+str(indice_punto1))
-    print("indice punto 2: "+str(indice_punto2))
+    mensaje = 'La ruta es: '
+    result = []
+    lista_dicts = buscar_dos_puntos(punto1,punto2) #lista con diccionarios
+    for diccionario in lista_dicts:
+      indice_punto1 = indice_punto_dict(punto1,diccionario)
+      indice_punto2 = indice_punto_dict(punto2,diccionario)
+      
+      if indice_punto1 and indice_punto2: #si encontro algo en los dos indices
+        print('indice punto 1: '+ str(indice_punto1[1])+'\n'+
+              'indice punto 2: '+ str(indice_punto2[1]))
+        if indice_punto1[1] < indice_punto2[1]:
+          result.append(indice_punto1[0])
+        else:
+          print('No se encontro una ruta')
+      else:
+        print("indice no encontrado")
+    if result:
+      for i in result:
+        mensaje = mensaje + i + ' '
+    else:
+      mensaje = "M no se encontro una ruta"
+    
+    return mensaje
+      
+    #print("indice punto 1: "+str(indice_punto1[1]))
+    #print("indice punto 2: "+str(indice_punto2[1]))
     #if indice_punto1 < indice_punto2: #si el indice es menor es porque hay una conexión logica 
     #  return True 
     #por cada ruta tengo que verificar en ida y vuelta, si punto1 esta antes de punto 2
@@ -131,9 +171,9 @@ def no_repeat():
 #3. borrar base
 #delete_base()
 #4. two points
-#two_points("calle 13","la popa")
+#two_points("la popa","calle 13")
 #5. dos puntos juntos
-buscar_dos_puntos("calle 13","la popa")
+#buscar_dos_puntos("calle 13","la popa")
 
 
 #TODO hacer un menu para la configuración de la base de datos, iniciar base, borrar colección, insertar documento

@@ -7,6 +7,7 @@ if __name__ == "__main__":
     text_from_audio = Listening()
     puntos = clasification(text_from_audio.lower())
     print(puntos)
+    #puntos = ['invico','la dulcera']
     if len(puntos) == 1: #si solo encontro un punto, busque las rutas 
         try:
             for indice in range(len(puntos)):
@@ -15,10 +16,8 @@ if __name__ == "__main__":
             print('No se encontro ningun resultado')
 
     elif len(puntos) == 2: #si hay dos puntos, busque una conexión logica
-        #llamer metodo crud_mongo
-        print('entre ruta 2 p')
-        two_points(puntos[0],puntos[1])
-
+        respuesta = two_points(puntos[0],puntos[1])
+        print(respuesta)
 
 
 #buscar_ruta("victoria")
