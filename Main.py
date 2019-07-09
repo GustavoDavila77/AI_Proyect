@@ -7,7 +7,7 @@ if __name__ == "__main__":
     text_from_audio = Listening()
     puntos = clasification(text_from_audio.lower())
     print(puntos)
-    #puntos = ['invico','la dulcera']
+    #puntos = ['la dulcera','invico']
     if len(puntos) == 1: #si solo encontro un punto, busque las rutas 
         try:
             for indice in range(len(puntos)):
