@@ -100,7 +100,7 @@ def indice_punto_dict(punto, diccionario):
     
 #devulve los indices 2 los 2 puntos en los diferentes listas de ida
 def two_points(punto1, punto2):
-    mensaje = 'La ruta es: '
+    mensaje = 'la ruta que le sirve es'
     result = []
     lista_dicts = buscar_dos_puntos(punto1,punto2) #lista con diccionarios
     for diccionario in lista_dicts:
@@ -118,9 +118,9 @@ def two_points(punto1, punto2):
         print("indice no encontrado")
     if result:
       for i in result:
-        mensaje = mensaje + i + ' '
+        mensaje = mensaje + i + ','
     else:
-      mensaje = "M no se encontro una ruta"
+      mensaje = "no se encontró una ruta"
     
     return mensaje
       
