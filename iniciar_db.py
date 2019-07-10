@@ -61,30 +61,3 @@ def fill_db():
 mongoClient.close()
 
 # TODO Hacer un try catch
-"""
-# PASO 4.2.1: "READ" -> Leemos todos los documentos de la base de datos
-cursor = collection.find()
-
-for rut in cursor:
-    print ("%s - %s" \
-          %(rut['nombre'], rut['ida']))
-
-# PASO 4.2.2: "READ" -> Hacemos una Query con condiciones y lo pasamos a un objeto Futbolista
-print ("\n\n*** Buqueda de los rutas que contengan terminal ***")
-cursor = collection.find({"ida":{"$in":["terminal"]}})
-for fut in cursor:
-    print ("%s - %s" \
-          %(fut['nombre'], fut['ida']))
-
-# PASO 4.3: "UPDATE" -> Actualizamos la edad de los jugadores.
-# 4 parametros
-#actualiza la edad de los jugadores mayores de 30, incrementa la edad en 100,
-#upsert --> si el campo edad no existe, lo crea
-#multi --> para que actualice todos los jugadores mayores de 30 
-#collection.update({"edad":{"$gt":30}},{"$inc":{"edad":100}}, upsert = False, multi = True)
-
-
-
-# PASO 4.4: "DELETE" -> Borramos todos las rutas que contengan utp
-#collection.remove({"ida": {"$in":["utp"]}})
-"""
