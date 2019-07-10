@@ -60,4 +60,4 @@ def fill_db():
 # PASO FINAL: Cerrar la conexion
 mongoClient.close()
 
-# TODO Hacer un try catch
+

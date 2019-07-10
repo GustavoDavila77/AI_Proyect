@@ -41,4 +41,6 @@ print(recorrido)
 """
 * el programa tiene problemas cuando hay recorridos que se componen 
 por una misma palabra eje: san luis, san nicolas
+
+solución: utilizar EntityRuler
 """

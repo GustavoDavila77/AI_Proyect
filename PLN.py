@@ -1,11 +1,12 @@
-import spacy
+import spacy #libreria para el procesamiento del lenguaje natural
 from spacy.lang.es import Spanish
-from spacy.pipeline import EntityRuler
-from spacy_lookup import Entity
+from spacy.pipeline import EntityRuler #permite añadir nombre de entidades basado en un diccionario de patrones
+from spacy_lookup import Entity #no es imprescindible 
 
-nlp = spacy.load('es_core_news_sm')
-ruler = EntityRuler(nlp)
+nlp = spacy.load('es_core_news_sm') #se carga el modelo para español
+ruler = EntityRuler(nlp) #se obtiene las reglas del modelo
 
+#diicionario de patrones
 patterns = [{"label": "frailes", "pattern": "frailes"},
         {"label": "santiago londoño", "pattern": [{"lower": "santiago"}, {"lower": "londoño"}]},
         {"label": "camilo mejia", "pattern": [{"lower": "camilo"}, {"lower": "mejía"}]},
@@ -160,13 +161,15 @@ patterns = [{"label": "frailes", "pattern": "frailes"},
         {"label": "utp", "pattern": "tecnologica"},
         {"label": "dosquebradas", "pattern": "dosquebradas"}]
 
-ruler.add_patterns(patterns)
-nlp.add_pipe(ruler)
+ruler.add_patterns(patterns) #se añade a las reglas, el diccionario de patrones
+nlp.add_pipe(ruler) #se añade la pipeline(fuente de información) las reglas
 
-#doc = nlp(u"rutas que me lleven de san luis a pollo")
+#doc = nlp(u"rutas que me lleven de san luis al pollo")
+
+# dado un texto, retorna los puntos encontrados en las entidades
 def clasification(texto):
     puntos = []
     doc = nlp(texto)
-    for ent in doc.ents:
+    for ent in doc.ents: #se obtiene las entidades del texto
         puntos.append(ent.label_)
     return puntos

@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-from crud_mongo import buscar_ruta, two_points
-from audio_txt import Listening
-from PLN import clasification
-from text_to_audio import reproducir
+from crud_mongo import buscar_ruta, two_points #hace las consultas en la base de datos
+from audio_txt import Listening #libreria para pasar de audio a texto
+from PLN import clasification #libreria para que permite obtener los barrios,direcciones
+from text_to_audio import reproducir #libreria para pasar de texto a audio
 
 if __name__ == "__main__":
     text_from_audio = Listening()
     puntos = clasification(text_from_audio.lower())
     print(puntos)
     #puntos = ['calle 13','la popa']
-    if len(puntos) == 1: #si solo encontro un punto, busque las rutas 
+    if len(puntos) == 1: #si solo encontro un punto, busque las rutas para ese punto
         buscar = buscar_ruta(puntos[0])
         reproducir(buscar)
 
@@ -19,5 +19,5 @@ if __name__ == "__main__":
         reproducir(respuesta)
 
 
-#TODO   4, 6, 
+#TODO add rutas 4, 6, 
 #29, 25A, 17

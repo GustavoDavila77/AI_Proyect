@@ -1,11 +1,12 @@
-import pyttsx3
+import pyttsx3 #instalar con pip3 install pyttsx3
 import win32com
 
 eng = pyttsx3.init()
-eng.setProperty('rate', 110)
-listVoices = eng.getProperty('voices')
-eng.setProperty('voice',listVoices[0].id)
+eng.setProperty('rate', 110) #controla la velocidad del habla
+listVoices = eng.getProperty('voices') #obtengo un objeto con info de la voz
+eng.setProperty('voice',listVoices[0].id)  #puede cambiar a modo ingles con [1]
 
+#reproduce un texto
 def reproducir(texto):
     eng.say(texto)
     eng.runAndWait()
